@@ -94,9 +94,3 @@ class GenitiveTest(BaseTest):
         else:  # N
             return "N"
 
-# Tests
-if __name__ == "__main__":
-    a = GenitiveTest()
-    a.make_normal()
-    a.print_sentence()
-
