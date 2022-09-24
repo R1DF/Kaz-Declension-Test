@@ -9,6 +9,7 @@ import random
 from data_getter import json_data
 from tests.nominative import NominativeTest
 from tests.genitive import GenitiveTest
+from tests.dative import DativeTest
 from tests.accusative import AccusativeTest
 
 # Clear function
@@ -34,6 +35,17 @@ def make_genitive():
     print(f"GENITIVE CASE\n{tester.description}\n")
     tester.print_sentence()
     input(f"\"Parent\" noun: {tester.parent_before}\n\"Child\" noun: {tester.child_before}\n\nPress Enter to return.\n\n")
+
+def make_dative():
+    clear()
+    tester = DativeTest()
+    if random.randint(1, 2) == 1:
+        tester.make_normal()
+    else:
+        tester.make_special()
+    print(f"DATIVE CASE\n{tester.description}\n")
+    tester.print_sentence()
+    input(f"Original noun: {tester.word_before}\n\nPress Enter to return.\n\n")
 
 def make_accusative():
     clear()
@@ -73,6 +85,8 @@ try:
                 make_nominative()
             case 2:
                 make_genitive()
+            case 3:
+                make_dative()
             case 4:
                 make_accusative()
             case 8:
