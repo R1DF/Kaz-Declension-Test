@@ -35,7 +35,7 @@ class BaseTest:
         """
         self.is_constant() but the word doesn't have to be in self.sentence()
         """
-        return not (letter.upper() in self.json_data["vowels"]["soft"] or letter.upper() in self.json_data["vowels"]["hard"])
+        return not letter.upper() in self.json_data["vowels"]["all"]
 
     def word_type(self, word_index):
         """
