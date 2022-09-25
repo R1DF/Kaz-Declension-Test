@@ -24,5 +24,5 @@ For more information, you can Google the case names individually or check [this 
 ## Release?
 No releases.<br>
 I don't intend to make an executable out of this.<br>
-If you really want to save it for some reason, then you need to have Python on your computer and just download
+If you really want to save it for some reason, then you need to have Python 3.10 (or earlier) on your computer and just download
 everything from the `/src/` folder.
