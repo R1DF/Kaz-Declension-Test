@@ -11,12 +11,13 @@ class GenitiveTest(BaseTest):
 
     def verify_child(self):
         # First step: Checking for exceptional letters at the ends.
-        if self.child[-1] == "к":
-            self.child = self.child[:-1] + "г"
-        elif self.child[-1] == "қ":
-            self.child = self.child[:-1] + "ғ"
-        elif self.child[-1] == "п":
-            self.child = self.child[:-1] + "б"
+        match self.child[-1]:
+            case "к":
+                self.child = self.child[:-1] + "г"
+            case "қ":
+                self.child = self.child[:-1] + "ғ"
+            case "п":
+                self.child = self.child[:-1] + "б"
 
     def add_child_ending(self, ending):
         child_endings = self.json_data["caseEndings"]["genitive"]["child"][ending]
@@ -28,7 +29,7 @@ class GenitiveTest(BaseTest):
     def make_special(self):
         # Getting words
         self.pronoun = self.json_data["pronounsAndEndings"][random.choice(list(self.json_data["pronounsAndEndings"].keys()))][1]
-        self.child = self.random_word()
+        self.child = random.choice(self.json_data["words"])
         self.parent_before = self.pronoun  # Immune to modification
         self.child_before = self.child  # Immune to modification
         self.sentence = [self.pronoun, self.child]
@@ -59,9 +60,9 @@ class GenitiveTest(BaseTest):
         self.sentence = [self.pronoun, self.child]
 
     def make_normal(self):
-        # Getting words
-        self.parent = self.random_word()
-        self.child = self.random_word()
+        # Getting words is different since this test uses 2
+        self.parent = random.choice(self.json_data["words"])
+        self.child = random.choice(self.json_data["words"])
         self.parent_before = self.parent  # Immune to modification
         self.child_before = self.child  # Immune to modification
         self.sentence = [self.parent, self.child]
