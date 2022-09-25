@@ -20,87 +20,55 @@ def clear():
     os.system("clear" if os.name != "nt" else "cls")
 
 # Test makers
-def make_nominative():
+def make_test(test_type):
+    # Clearing the screen required
     clear()
-    tester = NominativeTest()
-    print(f"NOMINATIVE CASE\n{tester.description}\n")
-    tester.make()
-    tester.print_sentence()
-    input("\n\nPress Enter to return.")
 
-def make_genitive():
-    clear()
-    tester = GenitiveTest()
-    if random.randint(1, 2) == 1:
-        tester.make_normal()
+    # Getting correct test
+    match test_type:
+        case "nominative":
+            tester = NominativeTest()
+        case "genitive":
+            tester = GenitiveTest()
+        case "dative":
+            tester = DativeTest()
+        case "accusative":
+            tester = AccusativeTest()
+        case "locative":
+            tester = LocativeTest()
+        case "ablative":
+            tester = AblativeTest()
+        case "instrumental":
+            tester = InstrumentalTest()
+        case _:
+            return
+
+    # Making sentence + Description
+    if test_type == "nominative":
+        tester.make()
     else:
-        tester.make_special()
-    print(f"GENITIVE CASE\n{tester.description}\n")
-    tester.print_sentence()
-    input(f"\"Parent\" noun: {tester.parent_before}\n\"Child\" noun: {tester.child_before}\n\nPress Enter to return.\n\n")
+        if random.randint(1, 3) == 3:
+            tester.make_special()
+        else:
+            tester.make_normal()
 
-def make_dative():
-    clear()
-    tester = DativeTest()
-    if random.randint(1, 2) == 1:
-        tester.make_normal()
+    print(f"{test_type.upper()} CASE:\n{tester.description}\n\nSENTENCE:")
+    tester.print_sentence()
+
+    # Printing details
+    if test_type == "genitive":  # Genitive case is special and I hate it
+        input(f"\nDETAILS:\n\"Parent\" noun: {tester.parent_before}\n\"Child\" noun: {tester.child_before}\n\nPress Enter to return.\n\n")
+    elif test_type == "nominative": # This one too
+        input("\nPress Enter to return.\n\n")
     else:
-        tester.make_special()
-    print(f"DATIVE CASE\n{tester.description}\n")
-    tester.print_sentence()
-    input(f"Original noun: {tester.word_before}\n\nPress Enter to return.\n\n")
-
-def make_accusative():
-    clear()
-    tester = AccusativeTest()
-    if random.randint(1, 2) == 1:
-        tester.make_normal()
-    else:
-        tester.make_special()
-    print(f"ACCUSATIVE CASE\n{tester.description}\n")
-    tester.print_sentence()
-    input(f"Original noun: {tester.word_before}\n\nPress Enter to return.\n\n")
-
-def make_locative():
-    clear()
-    tester = LocativeTest()
-    if random.randint(1, 2) == 1:
-        tester.make_normal()
-    else:
-        tester.make_special()
-    print(f"LOCATIVE CASE\n{tester.description}\n")
-    tester.print_sentence()
-    input(f"Original noun: {tester.word_before}\n\nPress Enter to return.\n\n")
-
-def make_ablative():
-    clear()
-    tester = AblativeTest()
-    if random.randint(1, 2) == 1:
-        tester.make_normal()
-    else:
-        tester.make_special()
-    print(f"ABLATIVE CASE\n{tester.description}\n")
-    tester.print_sentence()
-    input(f"Original noun: {tester.word_before}\n\nPress Enter to return.\n\n")
-
-def make_instrumental():
-    clear()
-    tester = InstrumentalTest()
-    if random.randint(1, 2) == 1:
-        tester.make_normal()
-    else:
-        tester.make_special()
-    print(f"INSTRUMENTAL CASE\n{tester.description}\n")
-    tester.print_sentence()
-    input(f"Original noun: {tester.word_before}\n\nPress Enter to return.\n\n")
-
+        input(f"\nDETAILS:\nOriginal noun: {tester.word_before}\n\nPress Enter to return.\n\n")
 
 # Main code
 try:
     os.system("title Kazakh Declension Test")
     while True:
         clear()  # Must always clear first
-        print("Kazakh Declension Test\nSelect a case to generate a sentence from:")
+        print("Kazakh Declension Test (by R1DF)\nSelect a case to generate a sentence from:")
         for noun_case in range(len(json_data["cases"])):
             print(f"{noun_case + 1}. {json_data['cases'][noun_case]}")
         print("8. Quit")
@@ -118,26 +86,26 @@ try:
         # Options
         match user_input:
             case 1:
-                make_nominative()
+                make_test("nominative")
             case 2:
-                make_genitive()
+                make_test("genitive")
             case 3:
-                make_dative()
+                make_test("dative")
             case 4:
-                make_accusative()
+                make_test("accusative")
             case 5:
-                make_locative()
+                make_test("locative")
             case 6:
-                make_ablative()
+                make_test("ablative")
             case 7:
-                make_instrumental()
+                make_test("instrumental")
             case 8:
                 break
 
     # Quit scenario
     clear()
+
 except KeyboardInterrupt:
     clear()
     print("Terminated.")
-
 
