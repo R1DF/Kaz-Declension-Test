@@ -8,6 +8,12 @@ class DativeTest(BaseTest):
         BaseTest.__init__(self)
         self.description = "The dative case higlights the recipient/beneficiary of a specific action: \"Who is receiving what?\". In the sentence \"John gave Hannah flowers\", Hannah is the recipient."
         self.word = ""
+        self.types_lists = {}
+        self.endings = []
+
+        # Types lists and endings
+        self.get_types_lists("dative")
+        self.get_endings("dative")
 
     def make_special(self):
         # Getting word
@@ -30,18 +36,14 @@ class DativeTest(BaseTest):
 
     def make_normal(self):
         # Initialization
-        self.word = self.random_word()
-        self.word_before = self.word
-        self.sentence = [self.word]
+        self.make_word_normal()
 
         # Adding ending
-        types_list = self.json_data["caseEndings"]["dative"]["lists"]
-        endings = self.json_data["caseEndings"]["dative"]["word"]
         last_letter = self.word[-1].upper()
-        if last_letter in types_list["G"]:
-            self.word += endings[0][0 if self.word_type(0) == "hard" else 1]
+        if last_letter in self.types_lists["G"]:
+            self.word += self.endings[0][0 if self.word_type(0) == "hard" else 1]
         else:
-            self.word += endings[1][0 if self.word_type(0) == "hard" else 1]
+            self.word += self.endings[1][0 if self.word_type(0) == "hard" else 1]
 
         # Updating
         self.sentence = [self.word]

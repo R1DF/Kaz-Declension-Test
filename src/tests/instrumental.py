@@ -8,6 +8,12 @@ class InstrumentalTest(BaseTest):
         BaseTest.__init__(self)
         self.description = "The instrumental case indicates that a noun is used by the subject to achieve an action or exists with the subject."
         self.word = ""
+        self.types_lists = {}
+        self.endings = []
+
+        # Types lists and endings
+        self.get_types_lists("instrumental")
+        self.get_endings("instrumental")
 
     def make_special(self):
         # Getting word
@@ -27,20 +33,16 @@ class InstrumentalTest(BaseTest):
 
     def make_normal(self):
         # Getting word
-        self.word = self.random_word()  # Only one word needed
-        self.word_before = self.word  # Saves original self
-        self.sentence = [self.word]
+        self.make_word_normal()
 
         # Adding ending
-        types_list = self.json_data["caseEndings"]["instrumental"]["lists"]
-        endings = self.json_data["caseEndings"]["instrumental"]["word"]
         last_letter = self.word[-1].upper()
-        if last_letter in types_list["B"]:
-            self.word += endings[0]
-        elif last_letter in types_list["P"]:
-            self.word += endings[1]
+        if last_letter in self.types_lists["B"]:
+            self.word += self.endings[0]
+        elif last_letter in self.types_lists["P"]:
+            self.word += self.endings[1]
         else:
-            self.word += endings[2]
+            self.word += self.endings[2]
 
         # Updating
         self.sentence = [self.word]
