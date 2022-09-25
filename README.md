@@ -25,4 +25,5 @@ For more information, you can Google the case names individually or check [this 
 No releases.<br>
 I don't intend to make an executable out of this.<br>
 If you really want to save it for some reason, then you need to have Python 3.10 (or earlier) on your computer and just download
-everything from the `/src/` folder.
+everything from the `/src/` folder. You MUST keep all files in the same folder (one reserved just for those) and none of them must be moved around inside!
+To run the project, simply open the Command prompt/Terminal, change the directory to the folder where `main.py` is and enter `py main.py`.
