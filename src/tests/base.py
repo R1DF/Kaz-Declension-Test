@@ -1,4 +1,4 @@
-"""
+"""c
 This is the base for a case test.
 Functions:
 is_soft()
@@ -12,12 +12,21 @@ import random
 class BaseTest:
     def __init__(self):
         self.sentence = []
+        self.types_lists = []
+        self.endings = []
 
         # Has its own version of data_getter
         with open(os.getcwd() + "\\data.json", encoding="utf-8") as f:
             self.json_data = json.load(f)
 
     # Universal functions (appear in every Test)
+    def get_types_lists(self, case_type):
+        self.types_lists = self.json_data["caseEndings"][case_type]["lists"]
+
+    def get_endings(self, case_type):
+        self.endings = self.json_data["caseEndings"][case_type]["word"]
+
+
     def print_sentence(self):
         """
         Prints out the sentence to the screen.
@@ -73,13 +82,8 @@ class BaseTest:
         elif letter in self.json_data["consonants"]["voiced"]:
             return "voiced"
 
-    def random_word(self):
-        return random.choice(self.json_data["words"])
-
-# # Tests
-# if __name__ == "__main__":
-#     test = BaseTest()
-#     for thing in ["меніңше", "ұлы", "апапаб", "апапеббн"]:
-#         test.sentence = [thing]
-#         print(test.word_type(0))
+    def make_word_normal(self, not_genitive=True):
+        self.word = self.word_before = random.choice(self.json_data["words"])
+        if not_genitive:  # Useless feature but I'll keep it on just in case I ever revisit this again -25.9.22
+            self.sentence = [self.word]
 
