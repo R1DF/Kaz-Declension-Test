@@ -2,7 +2,7 @@
 import random
 from .base import BaseTest
 
-# Genitive case
+# Locative case
 class LocativeTest(BaseTest):
     def __init__(self):
         BaseTest.__init__(self)

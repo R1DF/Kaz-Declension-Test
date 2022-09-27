@@ -2,7 +2,7 @@
 import random
 from .base import BaseTest
 
-# Genitive case
+# Accusative case
 class AccusativeTest(BaseTest):
     def __init__(self):
         BaseTest.__init__(self)

@@ -2,7 +2,7 @@
 import random
 from .base import BaseTest
 
-# Instruental case
+# Instrumental case
 class InstrumentalTest(BaseTest):
     def __init__(self):
         BaseTest.__init__(self)
